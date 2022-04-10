@@ -25,6 +25,18 @@
   margin: 20px 0;
 }
 
+.active {
+  background-color: rgb(240, 65, 65);
+}
+
+.choose-btn {
+  padding: 8px 16px;
+  background-color: #524eb7;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .image {
   height: 160px;
   width: 160px;

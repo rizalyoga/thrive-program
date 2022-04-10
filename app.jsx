@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { dataCharacter } from "./data";
 
+/* ------------------------- CHARACTER YANG DIPILIH ------------------------- */
+const CharacterChoose = ({ nameCharacter }) => {
+  return <h1 style={{ textAlign: "center", color: "white" }}>{nameCharacter}</h1>;
+};
+
+/* ---------------------------------- CARD ---------------------------------- */
+const Card = ({ dataCharacter, updateChoosing, background }) => {
+  const { id, imageProfile, name, city, age } = dataCharacter;
+
+  const choosingCharacter = () => {
+    updateChoosing(name, id);
+  };
+
+  return (
+    <div className={id == background ? "card active" : "card"}>
+      <img className="image" src={imageProfile} alt="avatar" />
+      <h1>{name}</h1>
+      <h2>{age}</h2>
+      <h3>{city}</h3>
+      <button className="choose-btn" onClick={choosingCharacter}>
+        choose
+      </button>
+    </div>
+  );
+};
+
+/* ----------------------------------- APP ---------------------------------- */
+const App = () => {
+  const [chooseCharacter, setChooseCharacter] = useState("");
+  const [idCaracter, setIdCharacter] = useState("");
+
+  const chooseTheCharacter = (nameCharacter, id) => {
+    setChooseCharacter(nameCharacter);
+    setIdCharacter(id);
+  };
+
+  return (
+    <>
+      <div className="container">
+        {dataCharacter.map((data) => (
+          <Card dataCharacter={data} background={idCaracter} updateChoosing={chooseTheCharacter} key={data.id} />
+        ))}
+        <CharacterChoose nameCharacter={chooseCharacter} />
+      </div>
+    </>
+  );
+};
+
+ReactDOM.render(React.createElement(App), document.getElementById("root"));
+
+// DAY-2
 // const AnimeBio = () => {
 //   return dataCharacter.map((data) =>
 //     React.createElement("div", { className: "card" }, [
@@ -12,28 +63,3 @@ import { dataCharacter } from "./data";
 //     ])
 //   );
 // };
-
-const Card = ({ dataCharacter }) => {
-  const { imageProfile, name, city, age } = dataCharacter;
-
-  return (
-    <div className="card">
-      <img className="image" src={imageProfile} alt="avatar" />
-      <h1>{name}</h1>
-      <h2>{age}</h2>
-      <h3>{city}</h3>
-    </div>
-  );
-};
-
-const App = () => {
-  return (
-    <div className="container">
-      {dataCharacter.map((data) => (
-        <Card dataCharacter={data} key={data.id} />
-      ))}
-    </div>
-  );
-};
-
-ReactDOM.render(React.createElement(App), document.getElementById("root"));
