@@ -1,23 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { dataCharacter } from "./data";
+import { getAllData, getSkill } from "./data/api";
 
 /* ------------------------- CHARACTER YANG DIPILIH ------------------------- */
-const CharacterChoose = ({ nameCharacter }) => {
-  return <h1 style={{ textAlign: "center", color: "white" }}>{nameCharacter}</h1>;
+const SkillButton = ({ characterId }) => {
+  const [dataSkill, setDataSkill] = useState([]);
+
+  /* --------------------------- GET SKILL HANDLING --------------------------- */
+  const getSkillCharacter = () => {
+    getSkill(characterId).then((response) => setDataSkill(response));
+  };
+
+  return (
+    <button id="show-skill-btn" className="choose-btn" onClick={getSkillCharacter}>
+      Show Skill
+    </button>
+  );
 };
 
 /* ---------------------------------- CARD ---------------------------------- */
 const Card = ({ dataCharacter, updateChoosing, background }) => {
-  const { id, imageProfile, name, city, age } = dataCharacter;
+  const { id, imgSrc, name, city, age } = dataCharacter;
 
   const choosingCharacter = () => {
-    updateChoosing(name, id);
+    updateChoosing(id);
   };
 
   return (
     <div className={id == background ? "card active" : "card"}>
-      <img className="image" src={imageProfile} alt="avatar" />
+      <img className="image" src={imgSrc} alt="avatar" />
       <h1>{name}</h1>
       <h2>{age}</h2>
       <h3>{city}</h3>
@@ -30,36 +41,27 @@ const Card = ({ dataCharacter, updateChoosing, background }) => {
 
 /* ----------------------------------- APP ---------------------------------- */
 const App = () => {
+  const [dataCharacter, setDataCharacter] = useState([]);
   const [chooseCharacter, setChooseCharacter] = useState("");
   const [idCaracter, setIdCharacter] = useState("");
 
-  const chooseTheCharacter = (nameCharacter, id) => {
-    setChooseCharacter(nameCharacter);
+  const chooseTheCharacter = (id) => {
+    setChooseCharacter(id);
     setIdCharacter(id);
   };
 
+  useEffect(() => {
+    getAllData().then((response) => setDataCharacter(response));
+  }, []);
+
   return (
-    <>
-      <div className="container">
-        {dataCharacter.map((data) => (
-          <Card dataCharacter={data} background={idCaracter} updateChoosing={chooseTheCharacter} key={data.id} />
-        ))}
-        <CharacterChoose nameCharacter={chooseCharacter} />
-      </div>
-    </>
+    <div className="container">
+      {dataCharacter.map((data) => (
+        <Card dataCharacter={data} background={idCaracter} updateChoosing={chooseTheCharacter} key={data.id} />
+      ))}
+      <SkillButton characterId={chooseCharacter} />
+    </div>
   );
 };
 
 ReactDOM.render(React.createElement(App), document.getElementById("root"));
-
-// DAY-2
-// const AnimeBio = () => {
-//   return dataCharacter.map((data) =>
-//     React.createElement("div", { className: "card" }, [
-//       React.createElement("img", { className: "image", src: data.imageProfile }),
-//       React.createElement("h1", {}, data.name),
-//       React.createElement("h2", {}, data.age),
-//       React.createElement("h2", {}, data.city),
-//     ])
-//   );
-// };
