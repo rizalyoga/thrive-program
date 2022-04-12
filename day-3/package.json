@@ -1,0 +1,20 @@
+{
+  "name": "implementasi-vdom",
+  "version": "1.0.0",
+  "description": "implementasi",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build index.html --dist-dir build",
+    "dev": " parcel index.html",
+    "start": " serve -s build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.4.1"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
