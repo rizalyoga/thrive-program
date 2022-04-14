@@ -8,9 +8,14 @@ function CardCity({ dataCity }) {
 
   const navigate = useNavigate();
 
+  // GOES TO VILAIN PAGE HANDLER
   const goesToVillain = (idCharacter, nameCharacter, cityName) => {
     navigate(`/villains/${idCharacter}/${nameCharacter}/${cityName}`);
   };
+
+  // const changeVisible = () => {
+  //   setIsVisible((prev) => !prev);
+  // };
 
   return (
     <>
@@ -24,7 +29,7 @@ function CardCity({ dataCity }) {
               (el) =>
                 el.id == idCharacter ? (
                   <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
-                    {data.name}
+                    Battle in {data.name}
                   </button>
                 ) : null
               // <button className="disable-btn">{data.name}</button>

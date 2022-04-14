@@ -24,7 +24,6 @@ body {
 
 .container {
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
   max-width: 992px;
   min-height: 100vh;

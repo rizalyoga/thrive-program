@@ -11,6 +11,7 @@ function City() {
   const params = useParams();
   const navigate = useNavigate();
 
+  //Get City Data
   useEffect(() => {
     getCity()
       .then((response) => setDataCity(response))

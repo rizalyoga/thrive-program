@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { getAllData, loadings } from "../../data/api";
 import LoadingComponent from "../../components/loading/Loading";
 import Card from "../../components/Card/Card";
-import { HeroesButton, GoesToCityButton } from "../../components/Button/Button";
+import { GoesToCityButton } from "../../components/Button/Button";
 
 const Home = () => {
   const [dataCharacter, setDataCharacter] = useState([]);
-  const [dataSkill, setDataSkill] = useState([]);
+  const [dataSkill] = useState([]);
   const [chooseCharacter, setChooseCharacter] = useState("");
   const [idCaracter, setIdCharacter] = useState("");
   const [loading, setLoading] = useState();

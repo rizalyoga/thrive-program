@@ -10,6 +10,7 @@ function Skill() {
   const [loading, setLoading] = useState();
   const { idCharacter } = useParams();
 
+  //Get Skills Data
   useEffect(() => {
     getSkill(idCharacter)
       .then((response) => setDataSkill(response))

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Card = ({ dataCharacter, updateChoosing, background, skill }) => {
-  // const { skills } = skill;
+  //Function for send id character && id Character to parrent component
   const choosingCharacter = (name, id) => {
     updateChoosing(name, id);
   };

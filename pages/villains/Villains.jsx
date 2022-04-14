@@ -10,6 +10,7 @@ function Villains() {
   const [loading, setLoading] = useState();
   const { idCharacter, nameCharacter } = useParams();
 
+  //Get Villains Data
   useEffect(() => {
     getVillains()
       .then((response) => setDataVillains(response))
