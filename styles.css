@@ -8,7 +8,7 @@
 }
 body {
   /* background-color: #524eb7; */
-  background: linear-gradient(to bottom right, #224ead 0%, #e22932 50%, #224ead 100%);
+  background: linear-gradient(to bottom right, #224ead 0%, #c01821 50%, #224ead 100%);
 }
 /* .container { */
 /* display: grid; */
@@ -40,9 +40,9 @@ body {
 }
 
 span {
-  color: rgba(235, 25, 110, 1);
+  color: #eb196e;
+  font-size: 2.5rem;
 }
-
 .title-page {
   margin-top: 30px;
   text-align: center;
@@ -55,7 +55,7 @@ span {
   grid-template-columns: repeat(auto-fill, 300px);
   gap: 2.5rem;
   margin: 30px 0;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
 .button-wrap {
@@ -100,6 +100,12 @@ span {
   border-radius: 3px;
   margin: 0 5px;
   font-weight: bolder;
+  min-width: 150px;
+  transition: ease-in 0.2s;
+}
+
+.choose-btn:hover {
+  background-color: #224ead;
 }
 
 .disable-btn {

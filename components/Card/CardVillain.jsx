@@ -1,8 +1,8 @@
 import React from "react";
 
 function CardVillain({ dataVillains }) {
-  const choosingVillain = (id) => {
-    console.log(id);
+  const choosingVillain = (name) => {
+    alert(`Your Villain is ${name}`);
   };
 
   return (
@@ -11,8 +11,8 @@ function CardVillain({ dataVillains }) {
         <div className="card" key={data.id}>
           <img className="image" src={data.imgSrc} alt="avatar" />
           <h1>{data.name}</h1>
-          <button className="choose-btn" onClick={() => choosingVillain(data.id)}>
-            choose
+          <button className="choose-btn" onClick={() => choosingVillain(data.name)}>
+            Fight {data.name}
           </button>
         </div>
       ))}

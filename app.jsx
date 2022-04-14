@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import City from "./pages/city/City";
 import Skill from "./pages/skill/Skill";
 import Villains from "./pages/villains/Villains";
+import PageNotFound from "./pages/404/PageNotFound";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/city/:idCharacter/:nameCharacter" element={<City />} />
         <Route path="/skill/:idCharacter/:nameCharacter" element={<Skill />} />
         <Route path="/villains/:idCharacter/:nameCharacter/:nameCity" element={<Villains />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

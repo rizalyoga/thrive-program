@@ -33,7 +33,7 @@ function City() {
       <div className="header">
         <div className="desc-header">
           <h1>
-            Welcome <span>{params.nameCharacter}</span>
+            Welcome <span>{params?.nameCharacter?.toUpperCase()}</span>
           </h1>
           <h2>Choose your battle ground !</h2>
         </div>

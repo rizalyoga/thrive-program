@@ -27,7 +27,14 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1 className="title-page">Choose Your Heros</h1>
+      <div className="header">
+        <div className="desc-header">
+          <h1 className="title-page">Choose Your Hero</h1>
+        </div>
+        {/* <div className="button-control">
+          <button className="choose-btn">Reset Game</button>
+        </div> */}
+      </div>
       {loading ? (
         <LoadingComponent />
       ) : (
