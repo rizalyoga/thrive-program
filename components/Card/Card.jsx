@@ -1,7 +1,7 @@
 import React from "react";
 
 const Card = ({ dataCharacter, updateChoosing, background, skill }) => {
-  const { skills } = skill;
+  // const { skills } = skill;
   const choosingCharacter = (name, id) => {
     updateChoosing(name, id);
   };
@@ -20,7 +20,7 @@ const Card = ({ dataCharacter, updateChoosing, background, skill }) => {
               </button>
             </div>
           ))
-        : skills?.map((data) => (
+        : skill.skills?.map((data) => (
             <div className="card" key={data.id}>
               <img className="image" src={data.imgSrc} alt="avatar" />
               <h3>{data.name}</h3>

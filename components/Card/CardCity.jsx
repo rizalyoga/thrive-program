@@ -20,14 +20,14 @@ function CardCity({ dataCity }) {
             <img src={data.imgSrc} alt="arena-image" />
           </div>
           <div className="button-title-city">
-            {data.heroes.map((el) =>
-              el.id == idCharacter ? (
-                <button className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
-                  {data.name}
-                </button>
-              ) : (
-                <button className="disable-btn">{data.name}</button>
-              )
+            {data.heroes.map(
+              (el) =>
+                el.id == idCharacter ? (
+                  <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                    {data.name}
+                  </button>
+                ) : null
+              // <button className="disable-btn">{data.name}</button>
             )}
           </div>
         </div>

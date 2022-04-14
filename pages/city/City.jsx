@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getCity } from "../../data/api";
+import { getCity, loadings } from "../../data/api";
 import CardCity from "../../components/Card/CardCity";
+import LoadingComponent from "../../components/loading/Loading";
 
 function City() {
   const [dataCity, setDataCity] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState();
 
   const params = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCity().then((response) => setDataCity(response));
+    getCity()
+      .then((response) => setDataCity(response))
+      .then(() => setLoading(false));
+    setLoading(loadings);
   }, []);
 
   //Back to Home Handler
@@ -42,10 +46,13 @@ function City() {
           </button>
         </div>
       </div>
-
-      <div className="card-container">
-        <CardCity dataCity={dataCity} />
-      </div>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="card-container">
+          <CardCity dataCity={dataCity} />
+        </div>
+      )}
     </div>
   );
 }
