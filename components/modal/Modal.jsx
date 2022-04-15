@@ -3,6 +3,7 @@ import "./modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import { getSelectedVillain, postFight, loadings } from "../../data/api";
 import { useParams } from "react-router-dom";
+// import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
@@ -20,6 +21,10 @@ const Modal = ({ setIsOpen, idVillain }) => {
       .then((response) => setDataVillain(response))
       .then(() => setLoading(false));
     setLoading(loadings);
+  }, []);
+
+  useEffect(() => {
+    return () => {};
   }, []);
 
   // Close Modal Handler
@@ -44,6 +49,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
       postFight(payload)
         .then((response) => {
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
+          window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ vilainHP: response.villainHP, heroHP: response.heroHP }));
         })
         .then(() =>
           setTimeout(() => {

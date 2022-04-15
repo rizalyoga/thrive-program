@@ -25,15 +25,22 @@ const Home = () => {
     setLoading(loadings);
   }, []);
 
+  // RESET GAME HANDLER
+  const resetGame = () => {
+    localStorage.clear();
+  };
+
   return (
     <div className="container">
       <div className="header">
         <div className="desc-header">
           <h1 className="title-page">Choose Your Hero</h1>
         </div>
-        {/* <div className="button-control">
-          <button className="choose-btn">Reset Game</button>
-        </div> */}
+        <div className="button-control">
+          <button className="choose-btn" onClick={resetGame}>
+            Reset Game
+          </button>
+        </div>
       </div>
       {loading ? (
         <LoadingComponent />
