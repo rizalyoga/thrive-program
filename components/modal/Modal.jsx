@@ -10,6 +10,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
   const [villainHP, setVillainHP] = useState(dataVillain[0]?.maxHP);
   const [loading, setLoading] = useState();
   const [loadingButton, setLoadingButton] = useState(false);
+  const [statusBattle, setStatusBattle] = useState("READY");
 
   const { nameCharacter } = useParams();
 
@@ -28,22 +29,28 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
   // Battle Handler
   const startBattle = (HPHero, HPVillain) => {
-    const payload = {
-      heroHP: HPHero,
-      villainHP: HPVillain,
-    };
+    if (HPHero === 0 || HPVillain === 0) {
+      villainHP == 0 ? setStatusBattle("YOU WIN") : heroHP == 0 ? setStatusBattle("YOU LOSE") : setStatusBattle("THE FIGHT IS ON");
+      villainHP == 0 ? alert("YOU WIN") : heroHP == 0 ? alert("YOU LOSE") : null;
+    } else {
+      setStatusBattle("THE FIGHT IS ON");
+      const payload = {
+        heroHP: HPHero,
+        villainHP: HPVillain,
+      };
 
-    setLoadingButton(true);
+      setLoadingButton(true);
 
-    postFight(payload)
-      .then((response) => {
-        setVillainHP(response.villainHP), setHeroHP(response.heroHP);
-      })
-      .then(() =>
-        setTimeout(() => {
-          setLoadingButton(false);
-        }, 500)
-      );
+      postFight(payload)
+        .then((response) => {
+          setVillainHP(response.villainHP), setHeroHP(response.heroHP);
+        })
+        .then(() =>
+          setTimeout(() => {
+            setLoadingButton(false);
+          }, 500)
+        );
+    }
   };
 
   return (
@@ -78,7 +85,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
                 {/* ------------------------------ Battle Status -----------------------------  */}
                 <div className="boxStatus">
-                  <h2>{villainHP != villainHP ? `${dataVillain[0]?.name.toUpperCase()} WON` : `${nameCharacter.toUpperCase()} WON`} </h2>
+                  <h2>{statusBattle}</h2>
                 </div>
 
                 {/*  ----------------------------- HP Bar Player -----------------------------  */}
@@ -91,7 +98,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- Action Control -----------------------------  */}
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className={loadingButton ? "disableBtn" : "fightBtn"} disabled={loadingButton ? true : false} onClick={() => startBattle(heroHP, villainHP ? villainHP : dataVillain[0].maxHP)}>
+                    <button className={loadingButton ? "disableBtn" : "fightBtn"} disabled={loadingButton ? true : false} onClick={() => startBattle(heroHP, villainHP ? villainHP : villainHP == 0 ? 0 : dataVillain[0].maxHP)}>
                       {loadingButton ? "Wait" : "Fight"}
                     </button>
                     {/* <button className="cancelBtn" onClick={closeModal}>

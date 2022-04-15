@@ -43,6 +43,6 @@ export const postFight = async (payload) => {
   });
 
   const data = await response.json();
-  // console.log("ini data hasil fight :", data);
+  console.log("HASIL FIGHT :", data);
   return data;
 };
