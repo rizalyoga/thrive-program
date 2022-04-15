@@ -104,6 +104,10 @@ span {
   transition: ease-in 0.2s;
 }
 
+.choose-btn:last-child {
+  margin: 2px 0 2px 2px;
+}
+
 .choose-btn:hover {
   background-color: #224ead;
 }
