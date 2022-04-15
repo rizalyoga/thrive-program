@@ -21,7 +21,7 @@ function Skill() {
   return (
     <div className="container">
       <h1 className="title-page">
-        Skills Possessed by <span>{dataSkill?.name?.toUpperCase()}</span>
+        <span>{dataSkill?.name?.toUpperCase()} </span> skills
       </h1>
       {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
       <div className="button-wrap">

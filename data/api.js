@@ -27,3 +27,10 @@ export const getVillains = async () => {
   // console.log(data);
   return data;
 };
+
+export const getSelectedVillain = async (villainId) => {
+  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/villain/${villainId}`);
+  const data = await response.json();
+  // console.log(data);
+  return data;
+};

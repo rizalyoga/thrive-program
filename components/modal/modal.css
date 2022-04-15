@@ -1,0 +1,188 @@
+.darkBG {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  min-width: 30rem;
+  min-height: 30rem;
+  /* background: white; */
+  color: white;
+  z-index: 10;
+  border-radius: 3px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.modalHeader {
+  height: 50px;
+  /* background: white; */
+  overflow: hidden;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.heading {
+  margin: 0;
+  padding: 10px;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
+.loadingModal {
+  margin-top: 35%;
+}
+/* ------------------------------ CONTENT MODAL ----------------------------- */
+
+.modalContent {
+  padding: 10px;
+  font-size: 14px;
+  color: #2c3e50;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.villainAvatar {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.villainAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #eb196e;
+  box-shadow: 0 -5px 30px rgb(51, 51, 51);
+}
+
+.boxStatus {
+  border: solid 2px #2c3e50;
+  height: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.progress {
+  margin: 30px auto;
+  padding: 2px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 30px;
+  font-weight: bold;
+  border: 2px solid #2c3e50;
+}
+
+.progressBar {
+  height: 100%;
+  transition: 1s;
+  /* background-color: #eb196e; */
+  background: repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px);
+}
+
+.statusHP {
+  /* padding-top: 2px; */
+  position: absolute;
+  left: 48%;
+}
+
+/* ----------------------------- CONTROL BUTTON ----------------------------- */
+
+.modalActions {
+  /* position: absolute; */
+  bottom: 2px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.closeBtn {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: none;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-self: flex-end;
+  margin-top: -7px;
+  margin-right: -7px;
+}
+
+.closeBtn:hover {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  transform: translate(-7px, 7px);
+  background: #eb196e;
+  color: white;
+}
+
+.fightBtn {
+  margin-top: 10px;
+  min-width: 120px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 13px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  border: none;
+  color: #fff;
+  background: #eb196e;
+  transition: all 0.25s ease;
+}
+
+.fightBtn:hover {
+  box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+  background: #ee2d7a;
+}
+
+.cancelBtn {
+  margin-top: 10px;
+  min-width: 120px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 13px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  border: none;
+  color: #2c3e50;
+  background: #fcfcfc;
+  transition: all 0.25s ease;
+}
+
+.cancelBtn:hover {
+  box-shadow: none;
+  transform: none;
+  background: #284ca8;
+  color: #fcfcfc;
+}
