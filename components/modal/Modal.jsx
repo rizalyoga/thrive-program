@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./modal.css";
 import { RiCloseLine } from "react-icons/ri";
-import { getSelectedVillain, loadings } from "../../data/api";
+import { getSelectedVillain, postFight, loadings } from "../../data/api";
 import { useParams } from "react-router-dom";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
   const [heroHP, setHeroHP] = useState(100);
-  const [villainHP, setVillainHP] = useState(100);
+  const [villainHP, setVillainHP] = useState(dataVillain[0]?.maxHP);
   const [loading, setLoading] = useState();
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const { nameCharacter } = useParams();
 
@@ -25,15 +26,24 @@ const Modal = ({ setIsOpen, idVillain }) => {
     setIsOpen(false);
   };
 
-  // Start Battle Handler
+  // Battle Handler
   const startBattle = (HPHero, HPVillain) => {
     const payload = {
       heroHP: HPHero,
       villainHP: HPVillain,
     };
-    console.log(payload);
-    setHeroHP((prev) => (prev > 0 ? prev - 10 : 0));
-    setVillainHP((prev) => (prev > 0 ? prev - 10 : prev === 0 ? 0 : null));
+
+    setLoadingButton(true);
+
+    postFight(payload)
+      .then((response) => {
+        setVillainHP(response.villainHP), setHeroHP(response.heroHP);
+      })
+      .then(() =>
+        setTimeout(() => {
+          setLoadingButton(false);
+        }, 500)
+      );
   };
 
   return (
@@ -57,7 +67,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 <div className="villainAvatar">
                   <img src={dataVillain[0]?.imgSrc} alt="villain-avatar" />
                 </div>
-                <h3>- {dataVillain[0]?.name} -</h3>
+                <h3>- {dataVillain[0]?.name.toUpperCase()} -</h3>
 
                 {/*  ----------------------------- HP Bar Villain -----------------------------  */}
                 <div className="progress" style={{ maxWidth: `${dataVillain[0]?.maxHP}` + "%" }}>
@@ -68,7 +78,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
                 {/* ------------------------------ Battle Status -----------------------------  */}
                 <div className="boxStatus">
-                  <h2>Ready</h2>
+                  <h2>{villainHP != villainHP ? `${dataVillain[0]?.name.toUpperCase()} WON` : `${nameCharacter.toUpperCase()} WON`} </h2>
                 </div>
 
                 {/*  ----------------------------- HP Bar Player -----------------------------  */}
@@ -76,13 +86,13 @@ const Modal = ({ setIsOpen, idVillain }) => {
                   <p className="statusHP">{heroHP} %</p>
                   <div className="playerHP progressBar" style={{ width: `${heroHP}` + "%" }}></div>
                 </div>
-                <h3>- {nameCharacter} -</h3>
+                <h3>- {nameCharacter.toUpperCase()} -</h3>
 
                 {/*  ----------------------------- Action Control -----------------------------  */}
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="fightBtn" onClick={() => startBattle(heroHP, dataVillain[0].maxHP)}>
-                      Fight
+                    <button className={loadingButton ? "disableBtn" : "fightBtn"} disabled={loadingButton ? true : false} onClick={() => startBattle(heroHP, villainHP ? villainHP : dataVillain[0].maxHP)}>
+                      {loadingButton ? "Wait" : "Fight"}
                     </button>
                     {/* <button className="cancelBtn" onClick={closeModal}>
                       Cancel

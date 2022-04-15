@@ -34,3 +34,15 @@ export const getSelectedVillain = async (villainId) => {
   // console.log(data);
   return data;
 };
+
+export const postFight = async (payload) => {
+  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/fight`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  // console.log("ini data hasil fight :", data);
+  return data;
+};

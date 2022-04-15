@@ -99,6 +99,16 @@
   transition: 1s;
   /* background-color: #eb196e; */
   background: repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px);
+  animation: fill-bar 1s;
+}
+
+@keyframes fill-bar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 .statusHP {
@@ -164,6 +174,20 @@
 .fightBtn:hover {
   box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
   background: #ee2d7a;
+}
+
+.disableBtn {
+  margin-top: 10px;
+  min-width: 120px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px 13px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  border: none;
+  color: #ee2d7a;
+  transition: all 0.25s ease;
+  /* background: rgb(88, 88, 88); */
 }
 
 .cancelBtn {
