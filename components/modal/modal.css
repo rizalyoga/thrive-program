@@ -28,7 +28,7 @@
 
 .modalHeader {
   height: 50px;
-  /* background: white; */
+  /* background: rgba(0, 225, 255, 0.2); */
   overflow: hidden;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -37,7 +37,7 @@
 .heading {
   margin: 0;
   padding: 10px;
-  color: #2c3e50;
+  color: #ffffff;
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -84,13 +84,14 @@
 }
 
 .progress {
-  margin: 30px auto;
-  padding: 2px;
+  margin: 20px auto;
+  padding: 2px 1px;
   min-width: 200px;
   max-width: 200px;
   height: 30px;
   font-weight: bold;
   border: 2px solid #2c3e50;
+  overflow: hidden;
 }
 
 .progressBar {
@@ -101,7 +102,6 @@
 }
 
 .statusHP {
-  /* padding-top: 2px; */
   position: absolute;
   left: 48%;
 }
