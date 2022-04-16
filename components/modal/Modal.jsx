@@ -3,7 +3,7 @@ import "./modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import { getSelectedVillain, postFight, loadings } from "../../data/api";
 import { useParams } from "react-router-dom";
-// import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useGetCity } from "../../hooks/useGetCity";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
@@ -12,8 +12,12 @@ const Modal = ({ setIsOpen, idVillain }) => {
   const [loading, setLoading] = useState();
   const [loadingButton, setLoadingButton] = useState(false);
   const [statusBattle, setStatusBattle] = useState("READY");
+  const [imageSource, setImageSource] = useState("");
 
   const { nameCharacter } = useParams();
+  const { nameCity } = useParams();
+
+  const { dataCity } = useGetCity();
 
   // Get Data Villain Function
   useEffect(() => {
@@ -23,14 +27,18 @@ const Modal = ({ setIsOpen, idVillain }) => {
     setLoading(loadings);
   }, []);
 
-  // Set HP Bar Villain and Hero, when there is fight data in Local Storage
+  // Set imageSource and HP bar (villain, hero) state
   useEffect(() => {
-    if (dataVillain[0]?.name) {
+    if (dataVillain[0]?.name && dataCity) {
+      // Check and set HP bar when there is fight data in local storage
       const anyDataFight = JSON.parse(localStorage.getItem(`${nameCharacter}VS${dataVillain[0]?.name}`));
       setVillainHP(anyDataFight ? anyDataFight.villainHP : dataVillain[0]?.maxHP);
       setHeroHP(anyDataFight ? anyDataFight.heroHP : 100);
+
+      // Filter background Modal that match with city name and set to imageSource state
+      dataCity.forEach((el) => (el.name == nameCity ? setImageSource(el.imgSrc) : null));
     }
-  }, [dataVillain]);
+  }, [dataVillain, dataCity]);
 
   // Close Modal Handler
   const closeModal = () => {
@@ -54,7 +62,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
       postFight(payload)
         .then((response) => {
           //set hit status battle, WIN or LOSE from response
-          response.heroHP < heroHP ? setStatusBattle("YOU LOSE, YOUR POIN -10") : response.villainHP < villainHP ? setStatusBattle("YOU WIN, VILLAIN POIN -10") : null;
+          response.heroHP < heroHP ? setStatusBattle("YOU LOSE, YOUR HP -10%") : response.villainHP < villainHP ? setStatusBattle("YOU WIN, VILLAIN HP -10%") : null;
 
           //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
@@ -77,7 +85,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
     <>
       <div className="darkBG" onClick={closeModal} />
       <div className="centered">
-        <div className="modal" style={{ backgroundImage: `linear-gradient(#b3b3b3b2, #ffffffb1),url(https://i.pinimg.com/originals/33/9f/b7/339fb7afe67658a9019f3b5cfb84ec19.jpg)`, backgroundSize: "cover" }}>
+        <div className="modal" style={{ backgroundImage: `linear-gradient(#b3b3b3b2, #ffffffb1),url(${imageSource})`, backgroundSize: "cover" }}>
           <div className="modalHeader">
             <h5 className="heading">- BATTLE WITH {dataVillain[0]?.name.toUpperCase()} -</h5>
           </div>
