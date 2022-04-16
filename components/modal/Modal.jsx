@@ -53,11 +53,14 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
       postFight(payload)
         .then((response) => {
+          //set hit status battle, WIN or LOSE from response
+          response.heroHP < heroHP ? setStatusBattle("YOU LOSE, YOUR POIN -10") : response.villainHP < villainHP ? setStatusBattle("YOU WIN, VILLAIN POIN -10") : null;
+
           //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
 
-          //set status battle from response
-          response.heroHP == 0 ? setStatusBattle("YOU LOSE") && alert("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : setStatusBattle("THE FIGHT IS ON");
+          //set final status battle, WIN or LOSE from response
+          response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
 
           //save data battle in local storage
           window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
