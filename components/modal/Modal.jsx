@@ -7,15 +7,15 @@ import { useParams } from "react-router-dom";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
-  const [heroHP, setHeroHP] = useState(100);
-  const [villainHP, setVillainHP] = useState(dataVillain[0]?.maxHP);
+  const [heroHP, setHeroHP] = useState();
+  const [villainHP, setVillainHP] = useState();
   const [loading, setLoading] = useState();
   const [loadingButton, setLoadingButton] = useState(false);
   const [statusBattle, setStatusBattle] = useState("READY");
 
   const { nameCharacter } = useParams();
 
-  //Get Data Villain Function
+  // Get Data Villain Function
   useEffect(() => {
     getSelectedVillain(idVillain)
       .then((response) => setDataVillain(response))
@@ -23,9 +23,14 @@ const Modal = ({ setIsOpen, idVillain }) => {
     setLoading(loadings);
   }, []);
 
+  // Set HP Bar, when there is data in Local Storage
   useEffect(() => {
-    return () => {};
-  }, []);
+    if (dataVillain[0]?.name) {
+      const anyDataFight = JSON.parse(localStorage.getItem(`${nameCharacter}VS${dataVillain[0]?.name}`));
+      setVillainHP(anyDataFight ? anyDataFight.villainHP : dataVillain[0]?.maxHP);
+      setHeroHP(anyDataFight ? anyDataFight.heroHP : 100);
+    }
+  }, [dataVillain]);
 
   // Close Modal Handler
   const closeModal = () => {
@@ -49,7 +54,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
       postFight(payload)
         .then((response) => {
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
-          window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ vilainHP: response.villainHP, heroHP: response.heroHP }));
+          window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
         })
         .then(() =>
           setTimeout(() => {
@@ -84,8 +89,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
                 {/*  ----------------------------- HP Bar Villain -----------------------------  */}
                 <div className="progress" style={{ maxWidth: `${dataVillain[0]?.maxHP}` + "%" }}>
-                  <p className="statusHP">{villainHP >= 0 ? `${villainHP}` : `${dataVillain[0]?.maxHP}`} %</p>
-
+                  <p className="statusHP">{villainHP} %</p>
                   <div className="villainHP progressBar" style={villainHP >= 0 ? { width: `${villainHP}` + "%" } : { width: `${dataVillain[0]?.maxHP}` + "%" }}></div>
                 </div>
 

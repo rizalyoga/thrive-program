@@ -27,7 +27,11 @@ const Home = () => {
 
   // RESET GAME HANDLER
   const resetGame = () => {
-    localStorage.clear();
+    const confirmReset = confirm("Are You Sure to Reset Game ?");
+    if (confirmReset) {
+      localStorage.clear();
+      alert("reset success ...");
+    }
   };
 
   return (
