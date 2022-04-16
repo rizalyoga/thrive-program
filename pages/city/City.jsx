@@ -24,7 +24,7 @@ function City() {
     navigate("/");
   };
 
-  //Goes to Skill Character
+  //Goes to Skill Character Page
   const goesToSkill = () => {
     navigate(`/skill/${params.idCharacter}/${params.nameCharacter}`);
   };

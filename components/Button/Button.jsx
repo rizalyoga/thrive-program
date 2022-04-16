@@ -13,3 +13,19 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
     </button>
   );
 };
+
+export const ButtonWin = () => {
+  return (
+    <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
+      You Win
+    </button>
+  );
+};
+
+export const ButtonLose = () => {
+  return (
+    <button className="disable-btn choose-btn" disabled={true} style={{ background: "red", color: "white", cursor: "default" }}>
+      You Lose
+    </button>
+  );
+};

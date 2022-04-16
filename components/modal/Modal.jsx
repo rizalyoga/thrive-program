@@ -23,7 +23,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
     setLoading(loadings);
   }, []);
 
-  // Set HP Bar, when there is data in Local Storage
+  // Set HP Bar Villain and Hero, when there is fight data in Local Storage
   useEffect(() => {
     if (dataVillain[0]?.name) {
       const anyDataFight = JSON.parse(localStorage.getItem(`${nameCharacter}VS${dataVillain[0]?.name}`));
@@ -43,7 +43,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
       villainHP == 0 ? setStatusBattle("YOU WIN") : heroHP == 0 ? setStatusBattle("YOU LOSE") : setStatusBattle("THE FIGHT IS ON");
       villainHP == 0 ? alert("YOU WIN") : heroHP == 0 ? alert("YOU LOSE") : null;
     } else {
-      setStatusBattle("THE FIGHT IS ON");
+      // setStatusBattle("THE FIGHT IS ON");
       const payload = {
         heroHP: HPHero,
         villainHP: HPVillain,
@@ -53,7 +53,13 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
       postFight(payload)
         .then((response) => {
+          //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
+
+          //set status battle from response
+          response.heroHP == 0 ? setStatusBattle("YOU LOSE") && alert("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : setStatusBattle("THE FIGHT IS ON");
+
+          //save data battle in local storage
           window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
         })
         .then(() =>
