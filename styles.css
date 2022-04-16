@@ -117,6 +117,10 @@ span {
   background-color: #224ead;
 }
 
+.choose-btn:focus {
+  background-color: rgba(235, 25, 110, 1);
+}
+
 .disable-btn {
   padding: 8px 16px;
   background-color: rgb(88, 88, 88);
@@ -124,6 +128,7 @@ span {
   border: none;
   border-radius: 3px;
   margin: 0 5px;
+  min-width: 150px;
   font-weight: bolder;
 }
 

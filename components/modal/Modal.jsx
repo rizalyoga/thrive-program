@@ -87,7 +87,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
               <h3 className="loadingModal">PLEASE WAIT . . .</h3>
             ) : (
               <>
-                {/*  ------------------------------ DESC Villain ------------------------------  */}
+                {/*  ------------------------------ Description Villain ------------------------------  */}
                 <div className="villainAvatar">
                   <img src={dataVillain[0]?.imgSrc} alt="villain-avatar" />
                 </div>

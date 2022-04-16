@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./CardCity-style.css";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
 
 function CardCity({ dataCity }) {
-  // const [isVisible, setIsVisible] = useState(false);
   const { idCharacter, nameCharacter } = useParams();
 
   const navigate = useNavigate();
@@ -13,10 +12,6 @@ function CardCity({ dataCity }) {
     navigate(`/villains/${idCharacter}/${nameCharacter}/${cityName}`);
   };
 
-  // const changeVisible = () => {
-  //   setIsVisible((prev) => !prev);
-  // };
-
   return (
     <>
       {dataCity?.map((data) => (
@@ -25,15 +20,27 @@ function CardCity({ dataCity }) {
             <img src={data.imgSrc} alt="arena-image" />
           </div>
           <div className="button-title-city">
-            {data.heroes.map(
-              (el) =>
-                el.id == idCharacter ? (
-                  <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
-                    Battle in {data.name}
-                  </button>
-                ) : null
-              // <button className="disable-btn">{data.name}</button>
-            )}
+            {data.heroes.length > 1
+              ? data.heroes
+                  .filter((el) => el.id == idCharacter)
+                  .map((el) => (
+                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                      Battle in {data.name}
+                    </button>
+                  ))
+              : data.heroes.map(
+                  (el) =>
+                    el.id == idCharacter ? (
+                      <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                        Battle in {data.name}
+                      </button>
+                    ) : (
+                      <button key={el.id} disabled={true} className="disable-btn">
+                        Battle in {data.name}
+                      </button>
+                    )
+                  // <button className="disable-btn">{el.name}</button>
+                )}
           </div>
         </div>
       ))}

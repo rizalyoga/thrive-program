@@ -9,6 +9,7 @@ function CardVillain({ dataVillains }) {
 
   const { nameCharacter } = useParams();
 
+  // Choose villain Handler
   const choosingVillain = (id) => {
     setIsOpen(true);
     setIdVillain(id);
