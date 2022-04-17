@@ -117,9 +117,18 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 <h3>- {dataVillain[0]?.name.toUpperCase()} -</h3>
 
                 {/*  ----------------------------- HP Bar Villain -----------------------------  */}
-                <div className="progress" style={{ maxWidth: `${dataVillain[0]?.maxHP}` + "%" }}>
+                <div className="progress" style={{ maxWidth: `${villainHP}%` }}>
                   <p className="statusHP">{villainHP} %</p>
-                  <div className="villainHP progressBar" style={villainHP >= 0 ? { width: `${villainHP}` + "%" } : { width: `${dataVillain[0]?.maxHP}` + "%" }}></div>
+                  <div
+                    className="villainHP progressBar"
+                    style={
+                      villainHP >= 70
+                        ? { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px)" }
+                        : villainHP >= 40
+                        ? { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #fab668, #fab668 20px, #ebc519 20px, #ebc519 40px)" }
+                        : { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #a80226, #a80226 20px, #ff3f39 20px, #ff3f39 40px)" }
+                    }
+                  ></div>
                 </div>
 
                 {/* ------------------------------ Battle Status -----------------------------  */}
@@ -130,7 +139,16 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- HP Bar Player -----------------------------  */}
                 <div className="progress">
                   <p className="statusHP">{heroHP} %</p>
-                  <div className="playerHP progressBar" style={{ width: `${heroHP}` + "%" }}></div>
+                  <div
+                    className="playerHP progressBar"
+                    style={
+                      heroHP >= 70
+                        ? { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px)" }
+                        : heroHP >= 40
+                        ? { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #fab668, #fab668 20px, #ebc519 20px, #ebc519 40px)" }
+                        : { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #a80226, #a80226 20px, #ff3f39 20px, #ff3f39 40px)" }
+                    }
+                  ></div>
                 </div>
                 <h3>- {nameCharacter.toUpperCase()} -</h3>
 
