@@ -45,6 +45,15 @@ const Modal = ({ setIsOpen, idVillain }) => {
     setIsOpen(false);
   };
 
+  // Even Handler when fight is ended
+  const fightEndhandler = (villainHP, heroHP) => {
+    heroHP == 0 ? setStatusBattle("YOU LOSE") : villainHP == 0 ? setStatusBattle("YOU WIN") : null;
+    setTimeout(() => {
+      heroHP == 0 ? alert("YOU LOSE") : villainHP == 0 ? alert("YOU WIN") : null;
+      closeModal();
+    }, 650);
+  };
+
   // Battle Handler
   const startBattle = (HPHero, HPVillain) => {
     if (HPHero === 0 || HPVillain === 0) {
@@ -67,8 +76,11 @@ const Modal = ({ setIsOpen, idVillain }) => {
           //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
 
+          //close modal and show alert when the fight is end
+          response.heroHP == 0 || response.villainHP == 0 ? fightEndhandler(response.villainHP, response.heroHP) : null;
+
           //set final status battle, WIN or LOSE from response
-          response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
+          // response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
 
           //save data battle in local storage
           window.localStorage.setItem(`${nameCharacter}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));

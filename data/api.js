@@ -1,7 +1,10 @@
 export let loadings = true;
+
+const url = "https://materi-thrive-demo.vercel.app";
+
 // Get Data Hero
 export const getAllData = async () => {
-  const response = await fetch("https://materi-thrive-demo.vercel.app/api/hero");
+  const response = await fetch(`${url}/api/hero`);
   const data = await response.json();
   //   console.log(data);
   return data;
@@ -9,7 +12,7 @@ export const getAllData = async () => {
 
 // Get Data Skill
 export const getSkill = async (characterId) => {
-  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/hero/${characterId}`);
+  const response = await fetch(`${url}/api/hero/${characterId}`);
   const data = await response.json();
   // console.log(data);
   return data;
@@ -17,7 +20,7 @@ export const getSkill = async (characterId) => {
 
 // Get Data City
 export const getCity = async () => {
-  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/city`);
+  const response = await fetch(`${url}/api/city`);
   const data = await response.json();
   // console.log(data);
   return data;
@@ -25,7 +28,7 @@ export const getCity = async () => {
 
 // Get Data Villain
 export const getVillains = async () => {
-  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/villain`);
+  const response = await fetch(`${url}/api/villain`);
   const data = await response.json();
   // console.log(data);
   return data;
@@ -33,7 +36,7 @@ export const getVillains = async () => {
 
 // Get Data Selected Villain
 export const getSelectedVillain = async (villainId) => {
-  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/villain/${villainId}`);
+  const response = await fetch(`${url}/api/villain/${villainId}`);
   const data = await response.json();
   // console.log(data);
   return data;
@@ -41,7 +44,7 @@ export const getSelectedVillain = async (villainId) => {
 
 // Post Fight Data
 export const postFight = async (payload) => {
-  const response = await fetch(`https://materi-thrive-demo.vercel.app/api/fight`, {
+  const response = await fetch(`${url}/api/fight`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

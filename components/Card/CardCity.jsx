@@ -1,6 +1,6 @@
 import React from "react";
 import "./CardCity-style.css";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function CardCity({ dataCity }) {
   const { idCharacter, nameCharacter } = useParams();
@@ -28,18 +28,16 @@ function CardCity({ dataCity }) {
                       Battle in {data.name}
                     </button>
                   ))
-              : data.heroes.map(
-                  (el) =>
-                    el.id == idCharacter ? (
-                      <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
-                        Battle in {data.name}
-                      </button>
-                    ) : (
-                      <button key={el.id} disabled={true} className="disable-btn">
-                        Battle in {data.name}
-                      </button>
-                    )
-                  // <button className="disable-btn">{el.name}</button>
+              : data.heroes.map((el) =>
+                  el.id == idCharacter ? (
+                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                      Battle in {data.name}
+                    </button>
+                  ) : (
+                    <button key={el.id} disabled={true} className="disable-btn">
+                      Battle in {data.name}
+                    </button>
+                  )
                 )}
           </div>
         </div>

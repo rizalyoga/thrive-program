@@ -4,6 +4,7 @@ import { GoesToCityButton } from "../../components/Button/Button";
 import { getVillains, loadings } from "../../data/api";
 import LoadingComponent from "../../components/loading/Loading";
 import CardVillains from "../../components/Card/CardVillain";
+import { useGetCity } from "../../hooks/useGetCity";
 
 function Villains() {
   const [dataVillains, setDataVillains] = useState([]);
@@ -18,6 +19,8 @@ function Villains() {
     setLoading(loadings);
   }, []);
 
+  const { dataCity } = useGetCity();
+
   return (
     <div className="container">
       <div className="header">
@@ -29,7 +32,7 @@ function Villains() {
           <GoesToCityButton characterId={idCharacter} characterName={nameCharacter} />
         </div>
       </div>
-      {loading ? <LoadingComponent /> : <div className="card-container">{dataVillains && <CardVillains dataVillains={dataVillains} />}</div>}
+      {loading ? <LoadingComponent /> : <div className="card-container">{dataVillains && <CardVillains dataVillains={dataVillains} dataCity={dataCity} />}</div>}
     </div>
   );
 }
