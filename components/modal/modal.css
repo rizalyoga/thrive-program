@@ -19,11 +19,21 @@
 .modal {
   min-width: 30rem;
   min-height: 30rem;
-  /* background: white; */
   color: white;
   z-index: 10;
   border-radius: 3px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  animation-name: zoom;
+  animation-duration: 1.8s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .modalHeader {
