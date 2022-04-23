@@ -3,6 +3,7 @@ import { getAllData, loadings } from "../../data/api";
 import LoadingComponent from "../../components/loading/Loading";
 import Card from "../../components/Card/Card";
 import { GoesToCityButton } from "../../components/Button/Button";
+import { confirmationtAlert } from "../../components/alert/resultAlert";
 
 const Home = () => {
   const [dataCharacter, setDataCharacter] = useState([]);
@@ -27,11 +28,12 @@ const Home = () => {
 
   // RESET GAME HANDLER
   const resetGame = () => {
-    const confirmReset = confirm("Are You Sure to Reset Game ?");
-    if (confirmReset) {
-      localStorage.clear();
-      alert("reset success ...");
-    }
+    confirmationtAlert();
+    // const confirmReset = confirm("Are You Sure to Reset Game ?");
+    // if (confirmReset) {
+    //   localStorage.clear();
+    //   alert("reset success ...");
+    // }
   };
 
   return (

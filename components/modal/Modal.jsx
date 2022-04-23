@@ -4,6 +4,7 @@ import { RiCloseLine } from "react-icons/ri";
 import { getSelectedVillain, postFight, loadings } from "../../data/api";
 import { useParams } from "react-router-dom";
 import { useGetCity } from "../../hooks/useGetCity";
+import { resultAlert } from "../alert/resultAlert";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
@@ -49,7 +50,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
   const fightEndhandler = (villainHP, heroHP) => {
     heroHP == 0 ? setStatusBattle("YOU LOSE") : villainHP == 0 ? setStatusBattle("YOU WIN") : null;
     setTimeout(() => {
-      heroHP == 0 ? alert("YOU LOSE") : villainHP == 0 ? alert("YOU WIN") : null;
+      heroHP == 0 ? resultAlert("Sorry You LOSE 😭") : villainHP == 0 ? resultAlert("Congratulations, You WIN 🎉") : null;
       closeModal();
     }, 650);
   };
