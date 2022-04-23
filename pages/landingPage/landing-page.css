@@ -1,0 +1,47 @@
+.container-landing-page {
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(90, 106, 168, 0.445), rgba(4, 9, 30, 0.7)), url(../../assets/all-Star.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.button.start-game {
+  color: lightyellow;
+}
+
+.button.start-game.start-game::after,
+.button.start-game.start-game::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border: 2px solid;
+  transition: all 0.06s ease;
+  border-radius: 2px;
+}
+
+.button.start-game.start-game::after {
+  /* bottom: 0; */
+  /* right: 0; */
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: lightcoral;
+  border-right-color: lightcoral;
+}
+
+.button.start-game.start-game::before {
+  /* top: 0; */
+  /* left: 0; */
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: lightcoral;
+  border-left-color: lightcoral;
+}
