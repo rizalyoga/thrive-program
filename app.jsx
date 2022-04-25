@@ -6,7 +6,7 @@ import City from "./pages/city/City";
 import Skill from "./pages/skill/Skill";
 import Villains from "./pages/villains/Villains";
 import PageNotFound from "./pages/404/PageNotFound";
-import LandingPage from "./pages/landingPage/LandingPage";
+// import LandingPage from "./pages/landingPage/LandingPage";
 
 const App = () => {
   return (
