@@ -12,8 +12,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/city/:idCharacter/:nameCharacter" element={<City />} />
         <Route path="/skill/:idCharacter/:nameCharacter" element={<Skill />} />
         <Route path="/villains/:idCharacter/:nameCharacter/:nameCity" element={<Villains />} />
